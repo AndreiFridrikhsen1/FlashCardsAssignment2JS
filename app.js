@@ -1,3 +1,4 @@
+  require('dotenv').config();
 const mongoose = require('mongoose');
 const DB = require('./config/db-config');
 const session = require('express-session');
