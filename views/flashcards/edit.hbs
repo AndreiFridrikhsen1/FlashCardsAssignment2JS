@@ -1,0 +1,40 @@
+<h1 class="mb-4">Edit Flashcard</h1>
+
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <form action="/flashcards/edit/{{flashcard._id}}" method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="front" class="form-label">Front (Question)</label>
+            <textarea class="form-control" id="front" name="front" rows="3" required>{{flashcard.front}}</textarea>
+          </div>
+          <div class="mb-3">
+            <label for="back" class="form-label">Back (Answer)</label>
+            <textarea class="form-control" id="back" name="back" rows="3" required>{{flashcard.back}}</textarea>
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input type="text" class="form-control" id="category" name="category" value="{{flashcard.category}}">
+          </div>
+          {{#if flashcard.imagePath}}
+          <div class="mb-3">
+            <label class="form-label">Current Image</label>
+            <div>
+              <img src="{{flashcard.imagePath}}" alt="Flashcard image" style="max-width: 200px; max-height: 200px;" class="img-thumbnail">
+            </div>
+          </div>
+          {{/if}}
+          <div class="mb-3">
+            <label for="image" class="form-label">New Image</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+          </div>
+          <div class="d-flex justify-content-between">
+            <a href="/flashcards" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Update Flashcard</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

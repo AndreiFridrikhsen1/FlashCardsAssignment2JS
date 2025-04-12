@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{title}}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="/">FlashCard App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          {{#if user}}
+            <li class="nav-item">
+              <a class="nav-link" href="/flashcards">My Flashcards</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/logout">Logout</a>
+            </li>
+          {{else}}
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/register">Register</a>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {{#if success_msg}}
+      <div class="alert alert-success">{{success_msg}}</div>
+    {{/if}}
+    {{#if error_msg}}
+      <div class="alert alert-danger">{{error_msg}}</div>
+    {{/if}}
+    {{#if error}}
+      <div class="alert alert-danger">{{error}}</div>
+    {{/if}}
+    {{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger">{{this.msg}}</div>
+      {{/each}}
+    {{/if}}
+    
+    {{{body}}}
+  </div>
+
+  <footer class="mt-5 py-3 bg-light text-center">
+    <div class="container">
+      <p>&copy; Created by Andrei Fridrikhsen</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<h1 class="mb-4">View Flashcard</h1>
+
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <div class="card">
+      <div class="card-header">
+        Category: {{flashcard.category}}
+      </div>
+      <div class="card-body">
+        <div class="mb-4">
+          <h5 class="card-title">Front:</h5>
+          <p class="card-text p-3 bg-light rounded">{{flashcard.front}}</p>
+        </div>
+        <div class="mb-4">
+          <h5 class="card-title">Back:</h5>
+          <p class="card-text p-3 bg-light rounded">{{flashcard.back}}</p>
+        </div>
+        {{#if flashcard.imagePath}}
+        <div class="mb-4">
+          <h5 class="card-title">Image:</h5>
+          <img src="{{flashcard.imagePath}}" alt="Flashcard image" style="max-width: 100%;" class="img-thumbnail">
+        </div>
+        {{/if}}
+      </div>
+      <div class="card-footer">
+        <div class="d-flex justify-content-between">
+          <a href="/flashcards" class="btn btn-secondary">Back to All Cards</a>
+          <div>
+            <a href="/flashcards/edit/{{flashcard._id}}" class="btn btn-warning">Edit</a>
+            <a href="/flashcards/delete/{{flashcard._id}}" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

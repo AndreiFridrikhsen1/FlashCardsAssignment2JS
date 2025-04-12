@@ -1,0 +1,32 @@
+<h1 class="mb-4">My Flashcards</h1>
+
+<div class="mb-4">
+  <a href="/flashcards/create" class="btn btn-primary">Create New Flashcard</a>
+  <a href="/flashcards/study" class="btn btn-success">Study Flashcards</a>
+</div>
+
+{{#if flashcards}}
+  <div class="row">
+    {{#each flashcards}}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{this.front}}</h5>
+            <p class="card-text text-muted">Category: {{this.category}}</p>
+          </div>
+          <div class="card-footer bg-white">
+            <div class="d-flex justify-content-between">
+              <a href="/flashcards/show/{{this._id}}" class="btn btn-sm btn-info">View</a>
+              <a href="/flashcards/edit/{{this._id}}" class="btn btn-sm btn-warning">Edit</a>
+              <a href="/flashcards/delete/{{this._id}}" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <div class="alert alert-info">
+    You don't have any flashcards yet. <a href="/flashcards/create">Create one now</a>.
+  </div>
+{{/if}}

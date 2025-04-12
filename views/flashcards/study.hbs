@@ -1,0 +1,101 @@
+<h1 class="mb-4">Study Flashcards</h1>
+
+{{#if flashcards.length}}
+<div class="study-container" id="flashcard-container" data-flashcards="{{flashcardsJSON}}">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between">
+          <span id="current-card">Card 1 of {{flashcards.length}}</span>
+          <span id="category"></span>
+        </div>
+        <div class="card-body">
+          <div id="flashcard" class="text-center p-5" style="min-height: 200px; cursor: pointer;">
+            <h3 id="card-content"></h3>
+            <div id="image-container" style="display: none;">
+              <img id="card-image" src="" alt="Flashcard image" style="max-width: 100%; max-height: 300px;" class="mt-3">
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <button id="prev-btn" class="btn btn-secondary" disabled>Previous</button>
+          <button id="flip-btn" class="btn btn-primary">Show the answer</button>
+          <button id="next-btn" class="btn btn-secondary">Next</button>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="/flashcards" class="btn btn-outline-secondary">Back to My Flashcards</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Get flashcards data
+  const container = document.getElementById('flashcard-container');
+  const flashcards = JSON.parse(container.getAttribute('data-flashcards'));
+  let currentCardIndex = 0;
+  let showingFront = true;
+  
+  
+  function updateCard() {
+    const card = flashcards[currentCardIndex];
+    document.getElementById('current-card').textContent = `Card ${currentCardIndex + 1} of ${flashcards.length}`;
+    document.getElementById('category').textContent = card.category || 'General';
+    document.getElementById('card-content').textContent = showingFront ? card.front : card.back;
+    
+    // Handle image
+    const imageContainer = document.getElementById('image-container');
+    const cardImage = document.getElementById('card-image');
+    if (card.imagePath && showingFront) {
+      cardImage.src = card.imagePath;
+      imageContainer.style.display = 'block';
+    } else {
+      imageContainer.style.display = 'none';
+    }
+    
+    // Update buttons
+    document.getElementById('prev-btn').disabled = currentCardIndex === 0;
+    document.getElementById('next-btn').disabled = currentCardIndex === flashcards.length - 1;
+  }
+  
+  // Initialize first card
+  if (flashcards.length > 0) {
+    updateCard();
+  }
+  
+  // Show the answer
+  document.getElementById('flip-btn').addEventListener('click', function() {
+    showingFront = !showingFront;
+    updateCard();
+  });
+  
+  // Click on card to show show the answer
+  document.getElementById('flashcard').addEventListener('click', function() {
+    showingFront = !showingFront;
+    updateCard();
+  });
+  
+  // Previous card
+  document.getElementById('prev-btn').addEventListener('click', function() {
+    if (currentCardIndex > 0) {
+      currentCardIndex--;
+      showingFront = true;
+      updateCard();
+    }
+  });
+  
+  // Next card
+  document.getElementById('next-btn').addEventListener('click', function() {
+    if (currentCardIndex < flashcards.length - 1) {
+      currentCardIndex++;
+      showingFront = true;
+      updateCard();
+    }
+  });
+</script>
+{{else}}
+<div class="alert alert-info">
+  You don't have any flashcards to study. <a href="/flashcards/create">Create some now</a>.
+</div>
+{{/if}}
