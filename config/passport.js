@@ -29,7 +29,7 @@ module.exports = function() {
   passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID || 'Ov23lioOWcuvZX4ADVUE',
     clientSecret: process.env.GITHUB_CLIENT_SECRET || 'c16b47dffec29c9c3895d17a2f8e7595aa2e0d0d',
-    callbackURL: process.env.GITHUB_CALLBACK_URL || 'http://localhost:3000/auth/github/callback'
+    callbackURL: process.env.GITHUB_CALLBACK_URL || 'https://flashcardsassignment2js.onrender.com/auth/github/callback'
   },
   async (accessToken, refreshToken, profile, done) => {
     try {
